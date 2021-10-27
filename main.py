@@ -1,25 +1,34 @@
+"""
+A* algorithm
+
+Usage:
+  main.py GRAPH_FILEPATH START_NODE END_NODE
+"""
+
 import os
-import graph_utils, config
+import graph_utils, file_utils, config
+from docopt import docopt
 
 
 def main() -> None:
 
+	#args = docopt(__doc__)
+	datafile = '1.txt'
+	start_point = 0
+	end_point = 3
+
 	# retrieve constants
-	NUMBER_OF_GRAPH_DATAFILES = config.NUMBER_OF_GRAPH_DATAFILES
 	GRAPHS_DATAFILES_PATH = config.GRAPHS_DATAFILES_PATH
 
-	# list of files containing graph data
-	graph_datafiles = [f'{i}.txt' for i in range(1, NUMBER_OF_GRAPH_DATAFILES)]
+	# retrieve raw graph data
+	raw_graph_data = file_utils.read_file(os.path.join(GRAPHS_DATAFILES_PATH, datafile))
 
-	# convert them into adjacency matrices
-	adjacency_matrices = []
-	for datafile in graph_datafiles:
-		datafile_path = os.path.join(GRAPHS_DATAFILES_PATH, datafile)
-		adjacency_matrix = graph_utils.get_adjacency_matrix(datafile_path)
-		adjacency_matrices.append(adjacency_matrix)
+	# get graph description from datafile
+	graph_description = graph_utils.get_graph_description(graph_data=raw_graph_data, end_point=end_point)
+	adjacency_matrix = graph_description['adjacency_matrix']
 
-	for i in adjacency_matrices:
-		print(i)
+	
+	print(graph_utils.get_node_neighbours(node=3, adjacency_matrix=adjacency_matrix))
 
 if __name__ == '__main__':
 	main()

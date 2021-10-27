@@ -12,5 +12,5 @@ def read_file(file_path: str) -> List[str]:
 
 		# delete newlines
 		lines = [line.rstrip() for line in lines]
-
+		
 	return lines
