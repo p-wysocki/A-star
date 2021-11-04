@@ -48,6 +48,20 @@ def get_node_coordinates(graph_data: str) -> List[List[int]]:
 	return node_coordinates
 
 
+def get_route(graph_data: str) -> Tuple[int, int]:
+	"""
+	Return route specified in graph datafile.
+
+	Arguments:
+		graph_data - raw datafile contents
+	Returns:
+		(start, end)
+	"""
+	raw_route = graph_data[1]
+	start, end = raw_route.split(' ')
+	return (start, end)
+
+
 def get_graph_description(graph_data: str, end_point: int) -> Dict:
 	"""
 	Return a custom data structure describing a graph.

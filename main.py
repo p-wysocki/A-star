@@ -2,7 +2,7 @@
 A* algorithm
 
 Usage:
-  main.py GRAPH_FILEPATH START_NODE END_NODE
+  main.py GRAPH_FILEPATH
 """
 
 import os
@@ -27,8 +27,18 @@ def main() -> None:
 	# get graph description from datafile
 	graph_description = graph_utils.get_graph_description(graph_data=raw_graph_data, end_point=end_point)
 
-	pathfinding.a_star((start_point, end_point), graph_description)
-	#print(graph_utils.get_node_neighbours(node=3, adjacency_matrix=adjacency_matrix))
+	route = graph_utils.get_route(graph_data=raw_graph_data)
+
+	# find path using A*
+	path_found = pathfinding.a_star(route=(start_point, end_point),
+									graph_description=graph_description)
+	
+	# display results
+	if path_found:
+		for node in path_found:
+			print(node, end=' ')
+	else:
+		print('Brak')
 
 if __name__ == '__main__':
 	main()
