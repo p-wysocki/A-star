@@ -59,7 +59,9 @@ def get_route(graph_data: str) -> Tuple[int, int]:
 	"""
 	raw_route = graph_data[1]
 	start, end = raw_route.split(' ')
-	return (start, end)
+
+	# subtract 1 to account for Python counting from 0
+	return (int(start)-1, int(end)-1)
 
 
 def get_graph_description(graph_data: str, end_point: int) -> Dict:

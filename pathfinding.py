@@ -80,6 +80,7 @@ def trace_path(came_from: dict, route: Tuple[int, int]):
 	
 	current_node, end = route
 	reconstructed_path = [current_node]
+	
 	while current_node != end:
 		current_node = came_from[current_node]
 		reconstructed_path.append(current_node)
