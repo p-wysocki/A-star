@@ -6,16 +6,17 @@ Usage:
 """
 
 import os
-import graph_utils, file_utils, config
+import graph_utils, file_utils
+import pathfinding, config
 from docopt import docopt
 
 
 def main() -> None:
 
 	#args = docopt(__doc__)
-	datafile = '1.txt'
+	datafile = '3.txt'
 	start_point = 0
-	end_point = 3
+	end_point = 15
 
 	# retrieve constants
 	GRAPHS_DATAFILES_PATH = config.GRAPHS_DATAFILES_PATH
@@ -25,10 +26,9 @@ def main() -> None:
 
 	# get graph description from datafile
 	graph_description = graph_utils.get_graph_description(graph_data=raw_graph_data, end_point=end_point)
-	adjacency_matrix = graph_description['adjacency_matrix']
 
-	
-	print(graph_utils.get_node_neighbours(node=3, adjacency_matrix=adjacency_matrix))
+	pathfinding.a_star((start_point, end_point), graph_description)
+	#print(graph_utils.get_node_neighbours(node=3, adjacency_matrix=adjacency_matrix))
 
 if __name__ == '__main__':
 	main()

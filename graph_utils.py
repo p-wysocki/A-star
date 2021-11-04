@@ -102,16 +102,11 @@ def get_node_neighbours(node: int, adjacency_matrix: np.array) -> List[Tuple[int
 	Returns:
 		list of (node_number, edge_weight)
 	"""
-	neighbours = []
+	neighbours = {}
 	for i, value in enumerate(adjacency_matrix[node]):
 
 		# if there's an edge
 		if value != 0:
-			neighbours.append((i, value))
+			neighbours[i] = value
 
 	return neighbours
-
-
-def A_star(start_node: int, end_node: int):
-	visited_nodes = []
-	
