@@ -76,7 +76,6 @@ def trace_path(came_from: dict, route: Tuple[int, int]) -> List[str]:
 			steps
 		route - tuple of (start, end) nodes
 	"""
-	#print(came_from)
 	start, current_node = route
 	reconstructed_path = [current_node]
 	
