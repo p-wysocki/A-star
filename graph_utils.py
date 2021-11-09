@@ -94,6 +94,9 @@ def get_graph_description(graph_data: str, end_point: int) -> Dict:
 	# add adjacency matrix
 	graph_description['adjacency_matrix'] = get_adjacency_matrix(graph_data)
 
+	# get average node-to-node weight to parametrise heuristics values
+	average_weight = graph_description['adjacency_matrix'][np.nonzero(graph_description['adjacency_matrix'])].mean()
+
 	# calculate node heuristics and add them to the dict
 	end_point = graph_description['nodes'][end_point]['coordinates']
 	for node_number in graph_description['nodes'].keys():
@@ -107,7 +110,7 @@ def get_graph_description(graph_data: str, end_point: int) -> Dict:
 def get_euclidean_distance(point_a: Tuple[int, int], point_b: Tuple[int, int]) -> int:
 	x_a, y_a = point_a
 	x_b, y_b = point_b
-	return ((((x_b - x_a )**2) + ((y_b-y_a)**2) )**0.5)
+	return (((x_b - x_a )**2) + ((y_b-y_a)**2) )**0.5
 
 
 def get_node_neighbours(node: int, adjacency_matrix: np.array) -> List[Tuple[int, int]]:

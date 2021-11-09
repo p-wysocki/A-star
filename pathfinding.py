@@ -56,7 +56,7 @@ def a_star(route: Tuple[int, int], graph_description: dict) -> List[int]:
 
 			# compare weights
 			if temp_start_to_node_cost < start_to_node[neighbour]:
-				came_from[cheapest_node_to_visit] = neighbour
+				came_from[neighbour] = cheapest_node_to_visit
 				start_to_node[neighbour] = temp_start_to_node_cost
 				combined_start_to_node[neighbour] = start_to_node[neighbour] + node_heuristics[neighbour]
 
@@ -67,23 +67,25 @@ def a_star(route: Tuple[int, int], graph_description: dict) -> List[int]:
 	return None
 
 
-def trace_path(came_from: dict, route: Tuple[int, int]):
+def trace_path(came_from: dict, route: Tuple[int, int]) -> List[str]:
 	"""
 	Return a list of consecutive nodes being an output of
 	the A* algorithm.
-
 	Arguments:
 		came_from - information about algorithm's consecutive
 			steps
 		route - tuple of (start, end) nodes
 	"""
-	
-	current_node, end = route
+	#print(came_from)
+	start, current_node = route
 	reconstructed_path = [current_node]
 	
-	while current_node != end:
+	while came_from[current_node]:
 		current_node = came_from[current_node]
-		reconstructed_path.append(current_node)
+		reconstructed_path.insert(0, current_node)
+
+	# insert the starting node
+	reconstructed_path.insert(0, start)
 
 	# add 1 element wise to account for Python counting from 0
 	reconstructed_path = [i+1 for i in reconstructed_path]
